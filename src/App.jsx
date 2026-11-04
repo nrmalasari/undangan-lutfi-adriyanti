@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 
-const GROOM = 'Muh Lutfi Sanusi'
+const GROOM = 'Muh Lutfi Sanuni'
 const BRIDE = 'Adriyanti Gaffar, S.Pd'
 const EVENT = new Date('2026-11-14T20:00:00+08:00') // WITA
 const MAPS = 'https://www.google.com/maps/search/?api=1&query=SMP+1+Patampanua+Leppangeng+Utara+Pinrang'
@@ -39,8 +39,7 @@ function Cover({ guest }) {
     <section className="tapestry relative h-[100dvh] min-h-[560px] w-full overflow-hidden">
       <div className="absolute inset-0">
         <div className="absolute inset-0">
-          <img src={FOTO[3]} alt="Muh Lutfi Sanusi & Adriyanti" className="h-full w-full object-cover object-[50%_20%]" />
-          {/* Gradasi dipertebal di tengah agar teks elegan dan terbaca, wajah tetap terang */}
+          <img src={FOTO[3]} alt="Muh Lutfi Sanuni & 'Adriyanti Gaffar, S.Pd" className="h-full w-full object-cover object-[50%_20%]" />
           <div className="absolute inset-0 bg-gradient-to-b from-maroon-dark/30 via-maroon-dark/70 to-maroon-dark/95" />
         </div>
       </div>
@@ -53,14 +52,14 @@ function Cover({ guest }) {
         {petals.map((p, i) => <span key={i} className="petal" style={{ left: `${p.l}%`, animationDuration: `${p.d}s`, animationDelay: `${p.de}s` }} />)}
       </div>
 
-      {/* Teks Pengantin Diposisikan Tepat di Tengah Layar */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center text-cream drop-shadow-lg mt-24">
+      {/* Teks Pengantin & Tombol Lokasi di Tengah Layar */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center text-cream drop-shadow-lg mt-16">
         <p className="font-serif2 text-[11px] sm:text-[13px] font-semibold uppercase tracking-[.4em] text-gold-light">The Wedding Of</p>
         
         <h1 className="mt-2 w-full font-script leading-[1.1] text-cream drop-shadow-md">
-          <span className="block text-[clamp(42px,14vw,64px)]">Muh Lutfi Sanusi</span>
-          <span className="block text-[clamp(30px,9vw,42px)] text-gold my-1">&amp;</span>
-          <span className="block text-[clamp(42px,14vw,64px)]">Adriyanti</span>
+          <span className="block text-[clamp(38px,13vw,56px)]">Muh Lutfi Sanuni</span>
+          <span className="block text-[clamp(28px,8vw,38px)] text-gold my-1">&amp;</span>
+          <span className="block text-[clamp(38px,13vw,56px)]">'Adriyanti Gaffar, S.Pd</span>
         </h1>
         
         <div className="mt-6 flex items-center justify-center gap-3 w-full max-w-[280px]">
@@ -69,12 +68,17 @@ function Cover({ guest }) {
           <div className="h-px bg-gold/50 flex-1"></div>
         </div>
         
-        <div className="mt-10 text-[13px] text-cream/90 bg-maroon-dark/40 backdrop-blur-sm px-6 py-3 rounded-2xl border border-gold/20">
-          <p className="text-[11px] uppercase tracking-wider mb-1">Kepada Yth.</p>
-          <p className="font-head text-lg font-semibold text-cream">{guest}</p>
+        <div className="mt-6 text-[13px] text-cream/90 bg-maroon-dark/40 backdrop-blur-sm px-6 py-2.5 rounded-2xl border border-gold/20">
+          <p className="text-[10px] uppercase tracking-wider mb-1">Kepada Yth.</p>
+          <p className="font-head text-base font-semibold text-cream">{guest}</p>
         </div>
+
+        {/* Tombol Lokasi Langsung di Cover */}
+        <a href={MAPS} target="_blank" rel="noreferrer" className="mt-6 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-gold to-[#b8862e] px-6 py-3 font-serif2 text-sm font-bold text-maroon-dark shadow-[0_4px_15px_rgba(212,175,55,0.4)] active:scale-95 transition-transform">
+          <span>📍</span> Lihat Lokasi Acara
+        </a>
         
-        <p className="bob mt-8 text-[11px] font-medium tracking-widest text-gold-light/70">GESER KE BAWAH ↓</p>
+        <p className="bob mt-6 text-[10px] font-medium tracking-widest text-gold-light/70">GESER KE BAWAH ↓</p>
       </div>
     </section>
   )
@@ -86,127 +90,96 @@ const Backdrop = ({ o = 0.18 }) => (
   </div>
 )
 
-function Frame({ src, className = '' }) {
-  return (
-    <div className={`mx-auto overflow-hidden rounded-t-[999px] border-[3px] border-gold-light/80 p-1.5 shadow-2xl ${className}`}>
-      <img src={src} alt="Foto pasangan" loading="lazy" className="h-full w-full rounded-t-[999px] object-cover" />
-    </div>
-  )
-}
-
 export default function App() {
   const t = useCountdown()
   const guest = useMemo(() => new URLSearchParams(location.search).get('to') || 'Tamu Undangan', [])
-  const nextRef = useRef(null)
 
   return (
     <main className="relative mx-auto w-full max-w-[520px] overflow-hidden bg-maroon text-cream shadow-2xl">
 
       <div className="relative z-10">
+        {/* BAGIAN 1: COVER UTAMA */}
         <Cover guest={guest} />
 
-        {/* FOTO */}
-        <section ref={nextRef} className="relative isolate bg-maroon px-6 pb-14 pt-16 text-center">
-          <Backdrop />
-          <Reveal type="rv-z"><Frame src={FOTO[0]} className="h-[min(480px,115vw)] w-[min(300px,78vw)]" /></Reveal>
-          <Reveal d={0.2}><p className="mt-8 font-script text-4xl text-gold-light">Bride &amp; Groom</p><Ornament className="mt-2" /></Reveal>
-        </section>
-
-        {/* PEMBUKAAN + MEMPELAI */}
+        {/* BAGIAN 2: MEMPELAI & ACARA */}
         <section className="relative isolate bg-gradient-to-b from-maroon to-maroon-dark px-6 py-14 text-center">
           <Backdrop />
           <Reveal><p dir="rtl" className="font-serif2 text-2xl text-gold-light">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</p></Reveal>
-          <Reveal d={0.15}>
-            <p className="mx-auto mt-5 max-w-sm text-[17px] leading-relaxed text-cream/90">
+          <Reveal d={0.1}>
+            <p className="mx-auto mt-4 max-w-sm text-[15px] leading-relaxed text-cream/90">
               Assalamu'alaikum Warahmatullahi Wabarakatuh. Dengan memohon rahmat dan ridho Allah SWT, kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri acara pernikahan kami.
             </p>
           </Reveal>
-          <Reveal d={0.1}><p className="mx-auto mt-5 max-w-sm text-sm italic text-gold-light/90">“Di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan pasangan untukmu dari jenismu sendiri agar kamu merasa tenteram kepadanya.” (QS. Ar-Rum: 21)</p></Reveal>
+          <Reveal d={0.15}>
+            <p className="mx-auto mt-4 max-w-sm text-[13px] italic text-gold-light/90">
+              “Di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan pasangan untukmu dari jenismu sendiri agar kamu merasa tenteram kepadanya.” (QS. Ar-Rum: 21)
+            </p>
+          </Reveal>
 
-          <Reveal type="rv-l" className="mt-12">
-            <div className="mx-auto w-full max-w-[320px] rounded-[2rem] border border-gold/60 bg-maroon-dark/60 px-5 py-8 shadow-xl">
-              <p className="font-serif2 text-xs uppercase tracking-[.3em] text-gold">Mempelai Pria</p>
-              <h2 className="mt-2 font-head text-[clamp(22px,7vw,28px)] leading-tight">{GROOM}</h2>
+          <Reveal type="rv-l" className="mt-10">
+            <div className="mx-auto w-full max-w-[320px] rounded-[2rem] border border-gold/60 bg-maroon-dark/60 px-5 py-6 shadow-xl">
+              <p className="font-serif2 text-[10px] uppercase tracking-[.3em] text-gold">Mempelai Pria</p>
+              <h2 className="mt-1 font-head text-[clamp(22px,7vw,26px)] leading-tight">{GROOM}</h2>
             </div>
           </Reveal>
-          <Reveal><p className="my-5 font-script text-5xl text-gold">dan</p></Reveal>
+          <Reveal><p className="my-4 font-script text-4xl text-gold">dan</p></Reveal>
           <Reveal type="rv-r">
-            <div className="mx-auto w-full max-w-[320px] rounded-[2rem] border border-gold/60 bg-maroon-dark/60 px-5 py-8 shadow-xl">
-              <p className="font-serif2 text-xs uppercase tracking-[.3em] text-gold">Mempelai Wanita</p>
-              <h2 className="mt-2 font-head text-[clamp(22px,7vw,28px)] leading-tight">{BRIDE}</h2>
+            <div className="mx-auto w-full max-w-[320px] rounded-[2rem] border border-gold/60 bg-maroon-dark/60 px-5 py-6 shadow-xl">
+              <p className="font-serif2 text-[10px] uppercase tracking-[.3em] text-gold">Mempelai Wanita</p>
+              <h2 className="mt-1 font-head text-[clamp(22px,7vw,26px)] leading-tight">{BRIDE}</h2>
             </div>
           </Reveal>
-        </section>
 
-        {/* SAVE THE DATE */}
-        <section className="relative overflow-hidden px-5 py-20 text-center">
-          <img src={FOTO[1]} alt="" className="absolute inset-0 h-full w-full object-cover object-top" />
-          <div className="absolute inset-0 bg-maroon-dark/75" />
-          <div className="relative">
-            <Reveal><h3 className="font-script text-6xl text-gold-light">Save The Date</h3></Reveal>
-            <Reveal d={0.15}>
-              <div className="mx-auto mt-6 grid max-w-[340px] grid-cols-4 gap-2">
+          {/* Waktu & Tempat Digabung ke Sini */}
+          <Reveal type="rv-z" className="mt-12">
+            <div className="mx-auto max-w-[340px] rounded-[2rem] border-2 border-gold bg-cream px-6 py-8 shadow-xl text-maroon">
+              <p className="font-serif2 text-[11px] font-semibold uppercase tracking-[.3em] text-gold">Resepsi Pernikahan</p>
+              <p className="mt-2 font-head text-xl">Sabtu</p>
+              <p className="font-head text-5xl leading-none">14</p>
+              <p className="font-head text-lg">November 2026</p>
+              <div className="my-4 h-px bg-gold/50" />
+              <p className="font-serif2 text-base font-semibold">Pukul 20.00 WITA – Selesai</p>
+              <p className="text-xs italic text-maroon/70 mb-3">(Malam Minggu)</p>
+              <div className="my-4 h-px bg-gold/50" />
+              <p className="font-serif2 text-base font-semibold">Kediaman Mempelai</p>
+              <p className="mt-1 text-[15px] leading-snug">Depan SMP 1 Patampanua<br />Leppangeng Utara, Pinrang</p>
+              <a href={MAPS} target="_blank" rel="noreferrer" className="mt-5 inline-flex items-center gap-2 rounded-full bg-maroon px-5 py-2.5 font-serif2 text-xs font-semibold tracking-wider text-gold-light active:scale-95">
+                <span>📍</span> Buka Google Maps
+              </a>
+            </div>
+          </Reveal>
+
+          {/* Save The Date (Countdown) */}
+          <Reveal d={0.2} className="mt-10">
+             <div className="mx-auto max-w-[340px] grid grid-cols-4 gap-2">
                 {Object.entries(t).map(([k, v]) => (
-                  <div key={k} className="rounded-xl bg-gradient-to-b from-gold to-[#b8862e] py-3 shadow-lg">
-                    <div className="font-head text-2xl font-semibold text-maroon-dark tabular-nums">{String(v).padStart(2, '0')}</div>
-                    <div className="text-[11px] font-semibold uppercase tracking-wider text-maroon-dark/80">{k}</div>
+                  <div key={k} className="rounded-xl bg-gradient-to-b from-gold to-[#b8862e] py-2 shadow-lg">
+                    <div className="font-head text-xl font-semibold text-maroon-dark tabular-nums">{String(v).padStart(2, '0')}</div>
+                    <div className="text-[9px] font-bold uppercase tracking-wider text-maroon-dark/80">{k}</div>
                   </div>
                 ))}
               </div>
-            </Reveal>
-            <Reveal d={0.25}><p className="mx-auto mt-8 max-w-xs text-[17px] leading-relaxed text-cream/95">Dan Kami bersyukur, dipertemukan Allah di waktu terbaik. Kini kami menanti hari istimewa kami.</p></Reveal>
-          </div>
-        </section>
-
-        {/* ACARA */}
-        <section className="relative isolate bg-cream px-6 py-16 text-center text-maroon">
-          <Backdrop o={0.14} />
-          <Reveal><p className="font-script text-5xl">Waktu &amp; Tempat</p><Ornament className="mt-2" /></Reveal>
-          <Reveal d={0.1} type="rv-z">
-            <div className="mx-auto mt-8 max-w-[340px] rounded-[2rem] border-2 border-gold bg-white/60 px-6 py-9 shadow-xl">
-              <p className="font-serif2 text-xs font-semibold uppercase tracking-[.3em] text-gold">Resepsi Pernikahan</p>
-              <p className="mt-3 font-head text-2xl">Sabtu</p>
-              <p className="font-head text-5xl leading-none">14</p>
-              <p className="font-head text-xl">November 2026</p>
-              <div className="my-5 h-px bg-gold/50" />
-              <p className="font-serif2 text-lg font-semibold">Pukul 20.00 WITA – Selesai</p>
-              <p className="text-sm italic text-maroon/70">(Malam Minggu)</p>
-              <div className="my-5 h-px bg-gold/50" />
-              <p className="font-serif2 text-lg font-semibold">Kediaman Mempelai</p>
-              <p className="mt-1 text-[17px] leading-snug">Depan SMP 1 Patampanua<br />Leppangeng Utara, Pinrang</p>
-              <a href={MAPS} target="_blank" rel="noreferrer" className="mt-6 inline-block rounded-full bg-maroon px-6 py-2.5 font-serif2 text-sm font-semibold tracking-wider text-gold-light active:scale-95">📍 Lihat Lokasi</a>
-            </div>
           </Reveal>
         </section>
 
-        {/* GALERI */}
-        <section className="relative isolate bg-maroon-dark px-5 py-16 text-center">
-          <Backdrop o={0.15} />
-          <Reveal><p className="font-script text-5xl text-gold-light">Galeri</p><Ornament className="mt-2" /></Reveal>
-          <div className="mx-auto mt-8 grid max-w-[400px] grid-cols-2 gap-3">
-            {FOTO.map((f, i) => (
-              <Reveal key={f} d={i * 0.12} type="rv-z" className={i === 0 || i === 3 ? 'col-span-2' : ''}>
-                <img src={f} alt={`Galeri ${i + 1}`} loading="lazy" className={`w-full rounded-2xl border-2 border-gold/60 object-cover shadow-xl ${i === 0 || i === 3 ? 'h-[380px] object-top' : 'h-[260px]'}`} />
-              </Reveal>
-            ))}
-          </div>
-        </section>
-
-        {/* PENUTUP + MENGUNDANG */}
+        {/* BAGIAN 3: PENUTUP */}
         <section className="tapestry relative px-6 py-16 text-center">
           <div className="absolute inset-0 bg-maroon/85" />
           <div className="absolute inset-0 flex items-center justify-center overflow-hidden"><img src="/img/orari.png" alt="" style={{ opacity: 0.18 }} className="h-[80%] max-h-[640px] w-auto" /></div>
           <div className="relative">
-            <Reveal><p className="mx-auto max-w-sm text-[17px] leading-relaxed">Merupakan kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu kepada kedua mempelai. Terima kasih atas perhatian dan kehadirannya.</p></Reveal>
-            <Reveal d={0.1}><p className="mt-6 font-serif2 italic text-gold-light">Wassalamu'alaikum Warahmatullahi Wabarakatuh</p></Reveal>
-            <Reveal d={0.15}><Ornament className="my-7" /><p className="font-serif2 text-xs uppercase tracking-[.3em] text-gold">Hormat Kami yang Mengundang</p></Reveal>
+            <Reveal><p className="mx-auto max-w-sm text-[15px] leading-relaxed">Merupakan kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu kepada kedua mempelai. Terima kasih atas perhatian dan kehadirannya.</p></Reveal>
+            <Reveal d={0.1}><p className="mt-5 font-serif2 italic text-sm text-gold-light">Wassalamu'alaikum Warahmatullahi Wabarakatuh</p></Reveal>
+            
+            <Reveal d={0.15}><Ornament className="my-6" /><p className="font-serif2 text-[10px] uppercase tracking-[.3em] text-gold">Hormat Kami yang Mengundang</p></Reveal>
+            
             <Reveal d={0.2}>
-              <div className="mx-auto mt-5 max-w-[320px] space-y-5">
-                <div><p className="font-head text-lg">Sanusi</p><p className="text-sm text-gold-light">YC8AXW · Wawan Op</p></div>
-                <div><p className="font-head text-lg leading-snug">Drs. A. Bakhtiar Tombong, SH, MSi</p><p className="text-sm text-gold-light">YB8ESA</p><p className="text-sm">Ketua ORARI Lokal Pinrang</p></div>
+              <div className="mx-auto mt-4 max-w-[320px] space-y-4">
+                <div><p className="font-head text-lg">Sanuni</p><p className="text-xs text-gold-light">YC8AXW · Wawan Op</p></div>
+                <div><p className="font-head text-base leading-snug">Drs. A. Bakhtiar Tombong, SH, MSi</p><p className="text-xs text-gold-light">YB8ESA</p><p className="text-xs">Ketua ORARI Lokal Pinrang</p></div>
               </div>
             </Reveal>
-            <Reveal d={0.3}><p className="mt-12 font-script text-4xl text-gold-light">{GROOM.split(' ').slice(0, 2).join(' ')} &amp; Adriyanti</p></Reveal>
+            
+            <Reveal d={0.3}><p className="mt-10 font-script text-4xl text-gold-light">Muh Lutfi &amp; 'Adriyanti Gaffar, S.Pd</p></Reveal>
           </div>
         </section>
       </div>
