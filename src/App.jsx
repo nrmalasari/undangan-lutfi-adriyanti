@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 
-const GROOM = 'Muh Lutfi Sanuni'
+const GROOM = 'Muh Lutfi Sanusi'
 const BRIDE = 'Adriyanti Gaffar, S.Pd'
 const EVENT = new Date('2026-11-14T20:00:00+08:00') // WITA
 const MAPS = 'https://www.google.com/maps/search/?api=1&query=SMP+1+Patampanua+Leppangeng+Utara+Pinrang'
@@ -33,41 +33,48 @@ const Ornament = ({ className = '' }) => (
   </svg>
 )
 
-function Cover({ guest, onOpen, opened }) {
+function Cover({ guest }) {
   const petals = useMemo(() => Array.from({ length: 14 }, (_, i) => ({ l: (i * 71) % 100, d: 9 + (i % 5) * 2, de: 7 + (i % 7) })), [])
   return (
     <section className="tapestry relative h-[100dvh] min-h-[560px] w-full overflow-hidden">
-      <div className="a-reveal absolute inset-0">
-        <div className="a-zoom absolute inset-0">
-          <img src={FOTO[3]} alt="Muh Lutfi Sanuni & Adriyanti" className="h-full w-full object-cover object-[50%_20%]" />
-          <div className="absolute inset-0 bg-gradient-to-t from-maroon-dark/95 via-maroon-dark/55 via-45% to-transparent" />
+      <div className="absolute inset-0">
+        <div className="absolute inset-0">
+          <img src={FOTO[3]} alt="Muh Lutfi Sanusi & Adriyanti" className="h-full w-full object-cover object-[50%_20%]" />
+          {/* Gradasi dipertebal di tengah agar teks elegan dan terbaca, wajah tetap terang */}
+          <div className="absolute inset-0 bg-gradient-to-b from-maroon-dark/30 via-maroon-dark/70 to-maroon-dark/95" />
         </div>
       </div>
-      <div className="a-curL absolute left-0 top-0 h-full w-[22%] max-w-[120px]" style={{ background: 'repeating-linear-gradient(90deg,#4a0a16 0 6px,#7a1426 6px 14px)', clipPath: 'polygon(0 0,100% 0,45% 30%,0 62%)', filter: 'drop-shadow(2px 4px 4px rgba(0,0,0,.4))' }} />
-      <div className="a-curR absolute right-0 top-0 h-full w-[22%] max-w-[120px]" style={{ background: 'repeating-linear-gradient(90deg,#7a1426 0 6px,#4a0a16 6px 14px)', clipPath: 'polygon(0 0,100% 0,100% 62%,55% 30%)', filter: 'drop-shadow(-2px 4px 4px rgba(0,0,0,.4))' }} />
-      <div className="a-top tapestry absolute left-1/2 top-0 h-[9%] min-h-[48px] w-[58%] max-w-[280px] border-b-2 border-gold" style={{ clipPath: 'polygon(0 0,100% 0,50% 100%)' }}>
+      <div className="absolute left-0 top-0 h-full w-[22%] max-w-[120px]" style={{ background: 'repeating-linear-gradient(90deg,#4a0a16 0 6px,#7a1426 6px 14px)', clipPath: 'polygon(0 0,100% 0,45% 30%,0 62%)', filter: 'drop-shadow(2px 4px 4px rgba(0,0,0,.4))' }} />
+      <div className="absolute right-0 top-0 h-full w-[22%] max-w-[120px]" style={{ background: 'repeating-linear-gradient(90deg,#7a1426 0 6px,#4a0a16 6px 14px)', clipPath: 'polygon(0 0,100% 0,100% 62%,55% 30%)', filter: 'drop-shadow(-2px 4px 4px rgba(0,0,0,.4))' }} />
+      <div className="tapestry absolute left-1/2 top-0 h-[9%] min-h-[48px] w-[58%] max-w-[280px] border-b-2 border-gold" style={{ clipPath: 'polygon(0 0,100% 0,50% 100%)' }}>
         <div className="absolute left-1/2 top-[18%] h-5 w-5 -translate-x-1/2 rotate-45 border border-gold-light bg-gold" />
       </div>
-      <div className="a-fade pointer-events-none absolute inset-0 overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
         {petals.map((p, i) => <span key={i} className="petal" style={{ left: `${p.l}%`, animationDuration: `${p.d}s`, animationDelay: `${p.de}s` }} />)}
       </div>
 
-      <div className="absolute inset-x-0 bottom-0 flex flex-col items-center px-6 pb-7 text-center [text-shadow:0_2px_12px_rgba(0,0,0,.55)]">
-        <p className="a-n1 font-serif2 text-[13px] font-semibold uppercase tracking-[.3em] text-gold-light">The Wedding Of</p>
-        <h1 className="mt-1 font-script leading-[1.02] text-cream">
-          <span className="a-n1 block text-[clamp(38px,12vw,56px)]">Muh Lutfi</span>
-          <span className="a-n2 block text-[clamp(28px,8vw,36px)] text-gold">&amp;</span>
-          <span className="a-n3 block text-[clamp(38px,12vw,56px)]">Adriyanti</span>
+      {/* Teks Pengantin Diposisikan Tepat di Tengah Layar */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center px-6 text-center text-cream drop-shadow-lg mt-24">
+        <p className="font-serif2 text-[11px] sm:text-[13px] font-semibold uppercase tracking-[.4em] text-gold-light">The Wedding Of</p>
+        
+        <h1 className="mt-2 w-full font-script leading-[1.1] text-cream drop-shadow-md">
+          <span className="block text-[clamp(42px,14vw,64px)]">Muh Lutfi Sanusi</span>
+          <span className="block text-[clamp(30px,9vw,42px)] text-gold my-1">&amp;</span>
+          <span className="block text-[clamp(42px,14vw,64px)]">Adriyanti</span>
         </h1>
-        <p className="a-date mt-2 font-serif2 text-sm font-semibold tracking-[.22em] text-gold-light">SABTU, 14 NOVEMBER 2026</p>
-        <div className="a-date mt-2 text-[13px] text-cream/85">
-          <p>Kepada Yth. Bapak/Ibu/Saudara/i</p>
-          <p className="font-head text-base font-semibold text-cream">{guest}</p>
+        
+        <div className="mt-6 flex items-center justify-center gap-3 w-full max-w-[280px]">
+          <div className="h-px bg-gold/50 flex-1"></div>
+          <p className="font-serif2 text-[12px] sm:text-sm font-semibold tracking-[.25em] text-gold-light whitespace-nowrap">14 NOVEMBER 2026</p>
+          <div className="h-px bg-gold/50 flex-1"></div>
         </div>
-        <button onClick={onOpen} className="a-btn pulse-gold mt-3 rounded-full border border-gold bg-maroon px-6 py-2.5 font-serif2 text-sm font-semibold tracking-wider text-gold-light [text-shadow:none] active:scale-95">
-          ✉ Buka Undangan
-        </button>
-        {!opened && <p className="a-btn bob mt-2 text-[11px] text-cream/60">geser ke bawah ↓</p>}
+        
+        <div className="mt-10 text-[13px] text-cream/90 bg-maroon-dark/40 backdrop-blur-sm px-6 py-3 rounded-2xl border border-gold/20">
+          <p className="text-[11px] uppercase tracking-wider mb-1">Kepada Yth.</p>
+          <p className="font-head text-lg font-semibold text-cream">{guest}</p>
+        </div>
+        
+        <p className="bob mt-8 text-[11px] font-medium tracking-widest text-gold-light/70">GESER KE BAWAH ↓</p>
       </div>
     </section>
   )
@@ -88,19 +95,15 @@ function Frame({ src, className = '' }) {
 }
 
 export default function App() {
-  const [opened, setOpened] = useState(false)
   const t = useCountdown()
   const guest = useMemo(() => new URLSearchParams(location.search).get('to') || 'Tamu Undangan', [])
   const nextRef = useRef(null)
-
-  useEffect(() => { document.body.style.overflow = opened ? 'auto' : 'hidden' }, [opened])
-  const open = () => { setOpened(true); setTimeout(() => nextRef.current?.scrollIntoView({ behavior: 'smooth' }), 80) }
 
   return (
     <main className="relative mx-auto w-full max-w-[520px] overflow-hidden bg-maroon text-cream shadow-2xl">
 
       <div className="relative z-10">
-        <Cover guest={guest} onOpen={open} opened={opened} />
+        <Cover guest={guest} />
 
         {/* FOTO */}
         <section ref={nextRef} className="relative isolate bg-maroon px-6 pb-14 pt-16 text-center">
